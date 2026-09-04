@@ -1,6 +1,7 @@
+import bcrypt
 from datetime import date
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
-from sqlalchemy import Integer, String, Date, ForeignKey
+from sqlalchemy import Integer, String, Date, Boolean, ForeignKey
 
 class Base(DeclarativeBase):
     pass
@@ -30,3 +31,14 @@ class ReaderBooks(Base):
      book_id: Mapped[int] = mapped_column(ForeignKey("books.id", ondelete="CASCADE"))
      taken_date: Mapped[date] = mapped_column(Date, default=date.today)
      return_at: Mapped[date | None] = mapped_column(Date, nullable=True)
+
+class User(Base):
+    __tablename__ = 'users'
+    id: Mapped[int] = mapped_column (Integer, primary_key=True)
+    full_name: Mapped[str] = mapped_column (String, nullable=False)
+    email: Mapped[str] = mapped_column (String, unique=True, nullable=False)
+    password_hash: Mapped[str] = mapped_column (String, nullable=False)
+    role: Mapped[str] = mapped_column (String, default="librarian", nullable=False)
+    is_active: Mapped[bool] = mapped_column(Boolean, default=True) 
+    created_at: Mapped[date] = mapped_column(Date, default=date.today)
+    updated_at: Mapped[date] = mapped_column(Date, default=date.today, onupdate=date.today)

@@ -1,11 +1,16 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends, HTTPException, status
 from app.schemas import BookModel, BookDetail, ReaderModel, ReaderProfile
+from database import SessionLocal
+from models import User
+from schemas import Token
+from auth import verify_password, create_access_token
 
 app = FastAPI() 
 
 @app.get('/')
 def read_root():
     return {'Message': 'HELLO WORLD!'}
+
 
 @app.get('/books', response_model = list[BookModel])
 def books_list():
@@ -25,3 +30,4 @@ def readers_id(reader_id: int):
 @app.get('/books/{books_id}', response_model = BookModel)
 def books_id(books_id: int):
     return {'books_id': books_id, 'details': {}}
+

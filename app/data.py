@@ -103,6 +103,29 @@ READERS_DATA = [
     }, #5
 ]
 
+USERS_DATA = [
+    {
+        "username": "admin",
+        "email": "admin@library.ru",
+        "password": "admin123",
+        "role": "admin",
+    },
+
+    {
+        "username": "librarian1",
+        "email": "lib1@library.ru",
+        "password": "lib12345",
+        "role": "librarian",
+    },
+    
+    {
+        "username": "librarian2",
+        "email": "lib2@library.ru",
+        "password": "lib67890",
+        "role": "librarian",
+    },
+]
+
 HISTORY_DATA = [
     {
         "reader_id": 1,
