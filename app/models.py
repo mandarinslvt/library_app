@@ -1,4 +1,4 @@
-import bcrypt
+
 from datetime import date
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 from sqlalchemy import Integer, String, Date, Boolean, ForeignKey

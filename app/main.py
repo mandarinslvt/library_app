@@ -1,18 +1,24 @@
 from fastapi import FastAPI, Depends, HTTPException, status
 from app.schemas import BookModel, BookDetail, ReaderModel, ReaderProfile
-from database import SessionLocal
-from models import User
-from schemas import Token
-from auth import verify_password, create_access_token
+from app.database import SessionLocal
+from app.models import User
+from app.schemas import Token
+from app.auth import verify_password, create_access_token
+import jwt
+from jwt.exceptions import InvalidTokenError as JWTError
+# 1. Оставляем только импорт роутера из файла auth
+from app.auth import auth_router 
 
 app = FastAPI() 
 
+app.include_router(auth_router)
+app = FastAPI() 
 @app.get('/')
 def read_root():
     return {'Message': 'HELLO WORLD!'}
 
 
-@app.get('/books', response_model = list[BookModel])
+@app.get('/books')
 def books_list():
     return {'bookTitles': []}
 
@@ -26,8 +32,6 @@ def readers_list():
 def readers_id(reader_id: int):
     return {'reader_id': reader_id, 'history': []}
 
-
 @app.get('/books/{books_id}', response_model = BookModel)
 def books_id(books_id: int):
     return {'books_id': books_id, 'details': {}}
-
