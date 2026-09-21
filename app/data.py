@@ -1,4 +1,4 @@
-# from sqlalchemy import 
+# from sqlalchemy import d
 from datetime import date, timedelta
 
 BOOKS_DATA = [

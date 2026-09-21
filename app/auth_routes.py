@@ -1,18 +1,14 @@
 from fastapi import FastAPI, Depends, HTTPException, status
 from sqlalchemy.orm import Session  
 from datetime import date
-
 from database import SessionLocal
 from models import User
-
 from schemas import (
     LoginRequest, Token, UserResponse, UserCreate, UserUpdate
 )
-
 from auth import verify_password, get_password_hash, create_access_token
 
 app = FastAPI()
-
 def get_db():
     db = SessionLocal()
     try:
@@ -21,7 +17,6 @@ def get_db():
         db.close()
 
 async def get_current_active_user(db: Session = Depends(get_db)):
-    # Временная заглушка: возвращает первого пользователя из базы
     user = db.query(User).first()
     if not user:
         raise HTTPException(status_code=401, detail="Не авторизован")
@@ -31,7 +26,6 @@ async def get_admin_user(current_user: User = Depends(get_current_active_user)):
     if current_user.role != "admin":
         raise HTTPException(status_code=403, detail="Доступно только для admin")
     return current_user
-
 
 #1.1
 @app.post("/login", response_model=Token)

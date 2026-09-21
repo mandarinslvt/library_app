@@ -6,7 +6,6 @@ from app.schemas import Token
 from app.auth import verify_password, create_access_token
 import jwt
 from jwt.exceptions import InvalidTokenError as JWTError
-# 1. Оставляем только импорт роутера из файла auth
 from app.auth import auth_router 
 
 app = FastAPI() 

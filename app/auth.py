@@ -1,5 +1,5 @@
-from datetime import datetime, timedelta, timezone  # добавили timezone
-from fastapi import Depends, HTTPException, status, APIRouter  # добавили APIRouter
+from datetime import datetime, timedelta, timezone
+from fastapi import Depends, HTTPException, status, APIRouter
 from fastapi.security import OAuth2PasswordBearer
 from jose import jwt, JWTError
 from passlib.context import CryptContext

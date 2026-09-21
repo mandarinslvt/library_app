@@ -7,6 +7,8 @@ class BookModel(BaseModel):
     point_author: str
     point_title: str
 
+
+
 class BookDetail(BookModel):
     available_status: bool
     reader_name: str | None
